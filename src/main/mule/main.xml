@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<flow name="get:\propostas\(numeroproposta)\origens\(origemproposta)" doc:id="996c3215-e711-4a64-8a23-55c00c6135cf" >
+		<ee:transform doc:name="Transform Message">
+            <ee:variables>
+                <ee:set-variable variableName="numeroproposta">attributes.uriParams.'numeroproposta'</ee:set-variable>
+                <ee:set-variable variableName="origemproposta">attributes.uriParams.'origemproposta'</ee:set-variable>
+            </ee:variables>
+        </ee:transform>
+		<ee:transform doc:name="Transform Message">
+            <ee:message>
+                <ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+[
+  {
+    convenio: "114",
+    dataProtocolo: "2023-05-23T00:00:00-03:00",
+    nomeSegurado: "BETINA E RENAN TELAS LTDA",
+    numeroOrigem: "20",
+    numeroProposta: "1111443",
+    produto: "Porto Frota",
+    qtdeDiasCia: "1",
+    status: "1",
+    susep: "S5005J"
+  }
+]]]></ee:set-payload>
+            </ee:message>
+        </ee:transform>
+	</flow>
+	<flow name="get:\propostas\busca-por-periodo" doc:id="eab009ec-cde0-424f-8e95-ac366a98e54c" >
+		<ee:transform doc:name="Transform Message">
+            <ee:message>
+                <ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+[
+  {
+    convenio: "114",
+    dataProtocolo: "2023-05-23T00:00:00-03:00",
+    nomeSegurado: "BETINA E RENAN TELAS LTDA",
+    numeroOrigem: "20",
+    numeroProposta: "1111443",
+    produto: "Porto Frota",
+    qtdeDiasCia: "1",
+    status: "1",
+    susep: "S5005J"
+  }
+]]]></ee:set-payload>
+            </ee:message>
+        </ee:transform>
+	</flow>
+	<flow name="get:\propostas\busca-por-cliente" doc:id="2718ddeb-ae24-4cec-b83f-c30e28b9f620" >
+		<ee:transform doc:name="Transform Message">
+            <ee:message>
+                <ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+[
+  {
+    convenio: "114",
+    dataProtocolo: "2023-05-23T00:00:00-03:00",
+    nomeSegurado: "BETINA E RENAN TELAS LTDA",
+    numeroOrigem: "20",
+    numeroProposta: "1111443",
+    produto: "Porto Frota",
+    qtdeDiasCia: "1",
+    status: "1",
+    susep: "S5005J"
+  }
+]]]></ee:set-payload>
+            </ee:message>
+        </ee:transform>
+	</flow>
+</mule>
