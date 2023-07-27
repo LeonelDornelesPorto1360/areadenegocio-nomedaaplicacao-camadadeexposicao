@@ -15,26 +15,10 @@ http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/
 
 
 
-
-	<http:listener-config
-		name="apiHttpsListenerConnectorConfig">
-		<http:listener-connection host="${http.host}"
-			port="${http.port}" />
-	</http:listener-config>
-
-
-
-
 	<configuration-properties
 		doc:name="envIndependentConfigurationProperties"
 		doc:id="bf5c9fe3-72b3-4f9d-b3c2-6afe7a4012ed"
 		file="config\properties.yaml" />
-
-
-
-
-	<global-property doc:name="Global Property"
-		doc:id="fad8e223-1763-4464-9a79-613023be03cd" name="env" value="dev" />
 
 
 
