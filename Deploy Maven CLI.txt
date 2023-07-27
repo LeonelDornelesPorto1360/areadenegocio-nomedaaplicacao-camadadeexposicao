@@ -1,0 +1,49 @@
+Organization name
+test123
+
+Organization domain
+test123-13
+
+Owner
+Leonel Porto
+
+Organization Id
+e324e3b2-8af2-454c-884d-0af805811a27
+
+Client Id
+1afbb75462b3401c990dbc7c84cdf3fc
+
+Client Secret
+8C86DA67880048dfA104627A31906654
+
+environment dev
+
+Client ID
+f14e562d14f94d58a20d2a2e1dadc4fd
+
+Client Secret
+5Cd363E91a194D1E8D44c649e8075f3F
+
+
+MyConnectedApp
+
+4b3586db49834affbcfeb200555558d4
+22D709b0fb5144499e38b07039dff669
+
+
+Windows:
+set client_id=cb2c6dbf85504c52933075e8ae491021
+set client_secret=c95879bad8e04c2B8FB0d1448fb17C1d
+set ca_client_id=7ca315684a2d4bf1a702d52bed4719d3
+set ca_client_secret=F24661E29AE44F3991d48cf7eFF12F97
+
+mvn clean package deploy -DmuleDeploy -Dap.client_id=%client_id% -Dap.client_secret=%client_secret% -Dap.ca.client_id=%ca_client_id% -Dap.ca.client_secret=%ca_client_secret% -Dencrypt.key=secure12345 -Ddeployment.env=dev
+
+Windows:
+set client_id=cb2c6dbf85504c52933075e8ae491021
+set client_secret=c95879bad8e04c2B8FB0d1448fb17C1d
+set ca_client_id=7ca315684a2d4bf1a702d52bed4719d3
+set ca_client_secret=F24661E29AE44F3991d48cf7eFF12F97
+
+mvn clean deploy -DmuleDeploy -DskipTests=true -Dmule.env=dev -Ddeployment.env=dev -Dap.client_id=f14e562d14f94d58a20d2a2e1dadc4fd -Dap.client_secret=5Cd363E91a194D1E8D44c649e8075f3F -Dencrypt.key=secure12345 -Dapi.layer=System -Dap.ca.client_id=4b3586db49834affbcfeb200555558d4 -Dap.ca.client_secret=22D709b0fb5144499e38b07039dff669 -DskipTests
+
