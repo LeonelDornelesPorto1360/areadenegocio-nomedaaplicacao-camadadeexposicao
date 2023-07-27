@@ -2,53 +2,54 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
+	<modelVersion>4.0.0</modelVersion> <!-- Versão do modelo do Maven -->
 
-	<groupId>com.osf.poc</groupId>
-	<artifactId>common-bom</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
-	<packaging>pom</packaging>
+	<groupId>com.myorganization.bom</groupId> <!-- Identificador do grupo do projeto -->
+	<artifactId>common-bom</artifactId> <!-- Identificador do artefato do projeto -->
+	<version>1.0.0</version> <!-- Versão do projeto -->
+	<packaging>pom</packaging> <!-- Tipo de empacotamento do projeto (pom = projeto pai) -->
 
-	<name>common-bom</name>
+	<name>common-bom</name> <!-- Nome do projeto -->
 
 	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding> <!-- Codificação dos recursos do projeto -->
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding> <!-- Codificação dos relatórios do projeto -->
 
-		<app.runtime>4.4.0-20230320</app.runtime>
-		<mule.maven.plugin.version>3.8.2</mule.maven.plugin.version>
-		<maven-clean-plugin.version>3.2.0</maven-clean-plugin.version>
-		<mule-http-connector.version>1.7.3</mule-http-connector.version>
-		<mule-sockets-connector.version>1.2.3</mule-sockets-connector.version>
-		<poc-port-osf.version>1.0.0</poc-port-osf.version>
-		<mule-apikit-module.version>1.8.2</mule-apikit-module.version>
+		<app.runtime>4.4.0-20230320</app.runtime> <!-- Versão da runtime da aplicação -->
+		<mule.maven.plugin.version>3.8.2</mule.maven.plugin.version> <!-- Versão do plugin do Mule Maven -->
+		<maven-clean-plugin.version>3.2.0</maven-clean-plugin.version> <!-- Versão do plugin de limpeza do Maven -->
+		<mule-http-connector.version>1.7.3</mule-http-connector.version> <!-- Versão do conector HTTP do Mule -->
+		<mule-sockets-connector.version>1.2.3</mule-sockets-connector.version> <!-- Versão do conector de sockets do Mule -->
+		<poc-port-osf.version>1.0.0</poc-port-osf.version> <!-- Versão do projeto POC Port OSF -->
+		<mule-apikit-module.version>1.9.1</mule-apikit-module.version> <!-- Versão do módulo Apikit do Mule -->
+		<mule-secure-configuration-property-module.version>1.2.5</mule-secure-configuration-property-module.version>
 	</properties>
 
 	<build>
 		<resources>
 			<resource>
-				<directory>src/main/resources</directory>
-				<filtering>true</filtering>
+				<directory>src/main/resources</directory> <!-- Diretório dos recursos do projeto -->
+				<filtering>true</filtering> <!-- Habilita a filtragem dos recursos -->
 			</resource>
 		</resources>
 		<testResources>
 			<testResource>
-				<directory>src/test/resources</directory>
-				<filtering>true</filtering>
+				<directory>src/test/resources</directory> <!-- Diretório dos recursos de teste do projeto -->
+				<filtering>true</filtering> <!-- Habilita a filtragem dos recursos de teste -->
 			</testResource>
 		</testResources>
 		<pluginManagement>
 			<plugins>
 				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-clean-plugin</artifactId>
-					<version>${maven-clean-plugin.version}</version>
+					<groupId>org.apache.maven.plugins</groupId> <!-- Identificador do grupo do plugin -->
+					<artifactId>maven-clean-plugin</artifactId> <!-- Identificador do artefato do plugin -->
+					<version>${maven-clean-plugin.version}</version> <!-- Versão do plugin -->
 				</plugin>
 				<plugin>
-					<groupId>org.mule.tools.maven</groupId>
-					<artifactId>mule-maven-plugin</artifactId>
-					<version>${mule.maven.plugin.version}</version>
-					<extensions>true</extensions>
+					<groupId>org.mule.tools.maven</groupId> <!-- Identificador do grupo do plugin -->
+					<artifactId>mule-maven-plugin</artifactId> <!-- Identificador do artefato do plugin -->
+					<version>${mule.maven.plugin.version}</version> <!-- Versão do plugin -->
+					<extensions>true</extensions> <!-- Habilita as extensões do plugin -->
 				</plugin>
 			</plugins>
 		</pluginManagement>
@@ -57,28 +58,34 @@
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
-				<groupId>org.mule.connectors</groupId>
-				<artifactId>mule-http-connector</artifactId>
-				<version>${mule-http-connector.version}</version>
-				<classifier>mule-plugin</classifier>
+				<groupId>org.mule.connectors</groupId> <!-- Identificador do grupo da dependência -->
+				<artifactId>mule-http-connector</artifactId> <!-- Identificador do artefato da dependência -->
+				<version>${mule-http-connector.version}</version> <!-- Versão da dependência -->
+				<classifier>mule-plugin</classifier> <!-- Classificador da dependência -->
 			</dependency>
 			<dependency>
-				<groupId>org.mule.connectors</groupId>
-				<artifactId>mule-sockets-connector</artifactId>
-				<version>${mule-sockets-connector.version}</version>
-				<classifier>mule-plugin</classifier>
+				<groupId>org.mule.connectors</groupId> <!-- Identificador do grupo da dependência -->
+				<artifactId>mule-sockets-connector</artifactId> <!-- Identificador do artefato da dependência -->
+				<version>${mule-sockets-connector.version}</version> <!-- Versão da dependência -->
+				<classifier>mule-plugin</classifier> <!-- Classificador da dependência -->
 			</dependency>
 			<dependency>
-				<groupId>e324e3b2-8af2-454c-884d-0af805811a27</groupId>
-				<artifactId>poc-port-osf</artifactId>
-				<version>${poc-port-osf.version}</version>
-				<classifier>oas</classifier>
-				<type>zip</type>
+				<groupId>e324e3b2-8af2-454c-884d-0af805811a27</groupId> <!-- Identificador do grupo da dependência -->
+				<artifactId>poc-port-osf</artifactId> <!-- Identificador do artefato da dependência -->
+				<version>${poc-port-osf.version}</version> <!-- Versão da dependência -->
+				<classifier>oas</classifier> <!-- Classificador da dependência -->
+				<type>zip</type> <!-- Tipo da dependência -->
 			</dependency>
 			<dependency>
-				<groupId>org.mule.modules</groupId>
-				<artifactId>mule-apikit-module</artifactId>
-				<version>${mule-apikit-module.version}</version>
+				<groupId>org.mule.modules</groupId> <!-- Identificador do grupo da dependência -->
+				<artifactId>mule-apikit-module</artifactId> <!-- Identificador do artefato da dependência -->
+				<version>${mule-apikit-module.version}</version> <!-- Versão da dependência -->
+				<classifier>mule-plugin</classifier> <!-- Classificador da dependência -->
+			</dependency>
+			<dependency>
+				<groupId>com.mulesoft.modules</groupId>
+				<artifactId>mule-secure-configuration-property-module</artifactId>
+				<version>${mule-secure-configuration-property-module.version}</version>
 				<classifier>mule-plugin</classifier>
 			</dependency>
 		</dependencies>
@@ -86,27 +93,27 @@
 
 	<repositories>
 		<repository>
-			<id>anypoint-exchange-v3</id>
-			<name>Anypoint Exchange</name>
-			<url>https://maven.anypoint.mulesoft.com/api/v3/maven</url>
-			<layout>default</layout>
+			<id>anypoint-exchange-v3</id> <!-- Identificador do repositório -->
+			<name>Anypoint Exchange</name> <!-- Nome do repositório -->
+			<url>https://maven.anypoint.mulesoft.com/api/v3/maven</url> <!-- URL do repositório -->
+			<layout>default</layout> <!-- Layout do repositório -->
 		</repository>
 		<repository>
-			<id>mulesoft-releases</id>
-			<name>MuleSoft Releases Repository</name>
-			<url>https://repository.mulesoft.org/releases/</url>
-			<layout>default</layout>
+			<id>mulesoft-releases</id> <!-- Identificador do repositório -->
+			<name>MuleSoft Releases Repository</name> <!-- Nome do repositório -->
+			<url>https://repository.mulesoft.org/releases/</url> <!-- URL do repositório -->
+			<layout>default</layout> <!-- Layout do repositório -->
 		</repository>
 	</repositories>
 
 	<pluginRepositories>
 		<pluginRepository>
-			<id>mulesoft-releases</id>
-			<name>MuleSoft Releases Repository</name>
-			<layout>default</layout>
-			<url>https://repository.mulesoft.org/releases/</url>
+			<id>mulesoft-releases</id> <!-- Identificador do repositório -->
+			<name>MuleSoft Releases Repository</name> <!-- Nome do repositório -->
+			<layout>default</layout> <!-- Layout do repositório -->
+			<url>https://repository.mulesoft.org/releases/</url> <!-- URL do repositório -->
 			<snapshots>
-				<enabled>false</enabled>
+				<enabled>false</enabled> <!-- Habilita ou desabilita os snapshots do repositório -->
 			</snapshots>
 		</pluginRepository>
 	</pluginRepositories>
