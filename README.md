@@ -1,4 +1,4 @@
-ste projeto consiste em várias flows (fluxos) que são executadas em um ambiente MuleSoft. Vou resumir cada uma delas:
+Este projeto consiste em várias flows (fluxos) que são executadas em um ambiente MuleSoft. Vou resumir cada uma delas:
 
 Flow "poc-port-osf-yaml-console":
 
