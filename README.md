@@ -1,16 +1,3 @@
-﻿
-
-![](Aspose.Words.edb195a2-fb5e-4e2d-857e-942f160ae531.001.png)Av. Dr. Cardoso de Melo, 1460 - 8º Floor
-
-Vila Olímpia, São Paulo - SP, 04548-005
-
-+55 11 2663-8989
-
-© 2023  All Rights Reserved.
-
-
-![](Aspose.Words.edb195a2-fb5e-4e2d-857e-942f160ae531.002.png)osf.digital![](Aspose.Words.edb195a2-fb5e-4e2d-857e-942f160ae531.003.png)
-
 **APRESENTAÇÃO PORTO**
 
 A apresentação aborda o acesso ao Design Center do MuleSoft e os passos para criar uma nova especificação de API. Também são mencionadas as dependências, como as Rulesets, que permitem definir regras personalizadas para controlar o comportamento das APIs. Além disso, são apresentados os passos para publicar a especificação no Anypoint Exchange, onde outros desenvolvedores podem descobri-la e reutilizá-la. Também são mencionados os endpoints do projeto e algumas boas práticas para organizar e manter a estrutura do projeto no Anypoint Studio. Por fim, são explicados conceitos importantes, como inputs, request e outputs, e o uso de propriedades de ambiente para gerenciar diferentes configurações em cada ambiente.
