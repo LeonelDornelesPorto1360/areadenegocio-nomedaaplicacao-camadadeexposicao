@@ -418,10 +418,4 @@ No exemplo fornecido, a lista de propriedades seguras contém três elementos: `
 
 Ao utilizar propriedades seguras, é possível armazenar essas informações sensíveis de forma criptografada e protegida, evitando que elas sejam expostas em texto plano no código-fonte ou em arquivos de configuração. Isso é especialmente importante em ambientes de produção, onde a segurança das informações é crucial.
 
-Essas propriedades seguras podem ser referenciadas em diferentes partes do código Mule, como em componentes, conectores ou configurações. Ao utilizar a lista `"SecureProperties"` no `mule-artifact.json`, o Mule Runtime será capaz de identificar essas propriedades e tratá-las de forma especial, garantindo que sejam carregadas e utilizadas de maneira segura durante a execução do aplicativo Mule.
-
-![Interface gráfica do usuário, Aplicativo
-
-Descrição gerada automaticamente](Aspose.Words.edb195a2-fb5e-4e2d-857e-942f160ae531.030.png)
-
-<a name="_hlk105570656"></a>©![](Aspose.Words.edb195a2-fb5e-4e2d-857e-942f160ae531.031.png)![](Aspose.Words.edb195a2-fb5e-4e2d-857e-942f160ae531.032.jpeg) 2023   OSF Global Services. All Rights Reserved.                                                ||  Pg. 24 | 24
+Essas propriedades seguras podem ser referenciadas em diferentes partes do código Mule, como em componentes, conectores ou configurações. Ao utilizar a lista `"SecureProperties"` no `mule-artifact.json`, o Mule Runtime será capaz de identificar essas propriedades e tratá-las de forma especial, garantindo que sejam carregadas e utilizadas de maneira segura durante a execução do aplicativo Mule.                                             ||  Pg. 24 | 24
