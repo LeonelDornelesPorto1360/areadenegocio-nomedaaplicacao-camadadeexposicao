@@ -1,6 +1,6 @@
 # Environment independent properties
 
-# Poc Porto API Spec Properties
+# Project API Spec Properties
 # resource::e324e3b2-8af2-454c-884d-0af805811a27:poc-port-osf:1.0.0:oas:zip:poc-port-osf-yaml.yaml
 api:
   groupId: "${connector.groupId}"

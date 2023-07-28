@@ -15,18 +15,19 @@ http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/
 
 
 
-	<configuration-properties
-		doc:name="envIndependentConfigurationProperties"
-		doc:id="bf5c9fe3-72b3-4f9d-b3c2-6afe7a4012ed"
-		file="config\properties.yaml" />
-
-
-
-
-
 	<apikit:config name="poc-port-osf-yaml-config"
 		api="${api.spec}" outboundHeadersMapName="outboundHeaders"
 		httpStatusVarName="httpStatus" />
+
+
+
+
+
+	<configuration-properties
+		doc:name="envIndependentConfigurationProperties"
+		doc:id="b98843dd-c196-4581-9ddf-464f95c92263"
+		file="config\properties.yaml" />
+
 
 
 
