@@ -1,38 +1,86 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:apikit="http://www.mulesoft.org/schema/mule/mule-apikit" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd http://www.mulesoft.org/schema/mule/mule-apikit http://www.mulesoft.org/schema/mule/mule-apikit/current/mule-apikit.xsd http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd ">
-    <flow name="poc-port-osf-yaml-main">
-        <http:listener config-ref="apiHttpsListenerConnectorConfig" path="/*">
+    <flow name="api-main">
+        <http:listener config-ref="api-main-https-listener-config" path="/*">
             <http:response statusCode="#[vars.httpStatus default 200]">
                 <http:headers><![CDATA[#[vars.outboundHeaders default {}]]]></http:headers>
             </http:response>
-            <http:error-response statusCode="#[vars.httpStatus default 500]">
+            <http:error-response statusCode="#[attributes.statusCode default 500]">
                 <http:body><![CDATA[#[payload]]]></http:body>
                 <http:headers><![CDATA[#[vars.outboundHeaders default {}]]]></http:headers>
             </http:error-response>
         </http:listener>
-        <apikit:router config-ref="poc-port-osf-yaml-config" />
-		<error-handler ref="Main_Error_Handler" /> 
-</flow>
-    <flow name="poc-port-osf-yaml-console">
-        <http:listener config-ref="apiHttpsListenerConnectorConfig" path="/console/*">
+        <apikit:router config-ref="api-config" />
+		<error-handler>
+			<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate APKIT" doc:id="e60eb9a3-3ad9-4ae5-aa0e-6e85ef3b6db4" >
+				<ee:transform doc:name="inputError and customErrorHandler" doc:id="3d1115c4-9798-43e1-aed1-b58c42df27b5">
+					<ee:message>
+						<ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+error]]></ee:set-payload>
+					</ee:message>
+					<ee:variables>
+						<ee:set-variable resource="customErrorHandler/custom-errors.dwl" variableName="custom-errors-dwl" />
+					</ee:variables>
+				</ee:transform>
+				<http:request method="POST" doc:name="Api Error Handler Global" doc:id="f74037b0-dac4-4b2f-8de5-9f6efebcf0fe" responseTimeout="#[50000]" config-ref="HTTP_Request_Configuration_Error_Handler_Global" path="${error-handler-global.paths.post-error-handler}">
+					<http:headers><![CDATA[#[output application/json
+---
+{
+	"X-Correlation-Id" : correlationId,
+	"custom-errors-dwl": vars.'custom-errors-dwl'
+}]]]></http:headers>
+					<http:response-validator>
+						<http:success-status-code-validator values="400,401,402,555" />
+					</http:response-validator>
+				</http:request>
+			</on-error-propagate>
+        </error-handler>
+    </flow>
+    <flow name="api-console">
+        <http:listener config-ref="api-main-https-listener-config" path="/console/*">
             <http:response statusCode="#[vars.httpStatus default 200]">
                 <http:headers><![CDATA[#[vars.outboundHeaders default {}]]]></http:headers>
             </http:response>
-            <http:error-response statusCode="#[vars.httpStatus default 500]">
+            <http:error-response statusCode="#[attributes.statusCode default 500]">
                 <http:body><![CDATA[#[payload]]]></http:body>
                 <http:headers><![CDATA[#[vars.outboundHeaders default {}]]]></http:headers>
             </http:error-response>
         </http:listener>
-        <apikit:console config-ref="poc-port-osf-yaml-config" />
-		<error-handler ref="Console_Error_Handler" /> 
-</flow>
-    <flow name="get:\propostas\busca-por-cliente:poc-port-osf-yaml-config">
-		<flow-ref doc:name="get:\propostas\busca-por-cliente" doc:id="854f89e8-8127-4596-b37f-9da320be5b10" name="get:\propostas\busca-por-cliente" />
+        <apikit:console config-ref="api-config" />
+        <error-handler>
+			<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate Console" doc:id="30daa3b6-812b-4411-a011-df48d3a75a72" >
+				<ee:transform doc:name="inputError and customErrorHandler" doc:id="fa008bc5-cca2-4e18-860e-b98556c5264a">
+					<ee:message>
+						<ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+error]]></ee:set-payload>
+					</ee:message>
+					<ee:variables>
+						<ee:set-variable resource="customErrorHandler/custom-errors.dwl" variableName="custom-errors-dwl" />
+					</ee:variables>
+				</ee:transform>
+				<http:request method="POST" doc:name="Api Error Handler Global" doc:id="ead9b225-3342-4b52-b0d2-af1805e11653" config-ref="HTTP_Request_Configuration_Error_Handler_Global" path="${error-handler-global.paths.post-error-handler}">
+					<http:headers><![CDATA[#[output application/json
+---
+{
+	"X-Correlation-Id" : correlationId,
+	"custom-errors-dwl": vars.'custom-errors-dwl'
+}]]]></http:headers>
+					<http:response-validator>
+						<http:success-status-code-validator values="400,401,402,555" />
+					</http:response-validator>
+				</http:request>
+			</on-error-propagate>
+       
+        </error-handler>
     </flow>
-    <flow name="get:\propostas\busca-por-periodo:poc-port-osf-yaml-config">
-		<flow-ref doc:name="get:\propostas\busca-por-periodo" doc:id="c3819f2a-f28d-4edc-995e-f52c26f9d083" name="get:\propostas\busca-por-periodo" />
+    <flow name="get:\customers\(customerId):api-config">
+		<flow-ref doc:name="get:\customers\(customerId)" doc:id="29ec2b16-c125-440d-9ec6-6f3067cc7065" name="get:\customers\(customerId)" />
     </flow>
-    <flow name="get:\propostas\(numeroproposta)\origens\(origemproposta):poc-port-osf-yaml-config">
-		<flow-ref doc:name="get:\propostas\(numeroproposta)\origens\(origemproposta)" doc:id="5cd5e730-fee9-4fe4-bc9c-e1168c378df3" name="get:\propostas\(numeroproposta)\origens\(origemproposta)" />
+    <flow name="post:\customers:application\json:api-config">
+		<flow-ref doc:name="post:\customers" doc:id="6e03c8e7-e600-4815-8515-ba1fb4955e40" name="post:\customers" />
     </flow>
 </mule>

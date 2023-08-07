@@ -3,8 +3,6 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<!-- Versão do modelo do Maven -->
-
 	<parent>
 		<groupId>com.myorganization.parentpom</groupId>
 		<!-- Identificador do grupo do projeto pai -->
@@ -26,13 +24,18 @@
 	<!-- Tipo de empacotamento do projeto -->
 
 	<name>areadenegocio-nomedaaplicacao-camadadeexposicao</name>
-	<!-- Nome do projeto -->
 
 	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+		<app.runtime>4.4.0-20230320</app.runtime>
+		<mule.maven.plugin.version>3.8.2</mule.maven.plugin.version>
+
 		<!-- soap-rest-api Connector Properties -->
-		<connector.groupId>e324e3b2-8af2-454c-884d-0af805811a27</connector.groupId>
+		<connector.groupId>f8f9abd2-10a0-400f-bb5b-60cbd5b8cb29</connector.groupId>
 		<!-- Identificador do grupo do conector -->
-		<connector.artifactId>poc-port-osf</connector.artifactId>
+		<connector.artifactId>areadenegocio-nomedaaplicacao-camadadeexposicao</connector.artifactId>
 		<!-- Identificador do artefato do conector -->
 		<connector.version>1.0.0</connector.version>
 		<!-- Versão do conector -->
@@ -43,10 +46,12 @@
 	<build>
 		<plugins>
 			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-clean-plugin</artifactId>
+			</plugin>
+			<plugin>
 				<groupId>org.mule.tools.maven</groupId>
-				<!-- Identificador do grupo do plugin -->
 				<artifactId>mule-maven-plugin</artifactId>
-				<!-- Identificador do artefato do plugin -->
 			</plugin>
 		</plugins>
 	</build>
@@ -54,49 +59,24 @@
 	<dependencies>
 		<dependency>
 			<groupId>org.mule.connectors</groupId>
-			<!-- Identificador do grupo da dependência -->
 			<artifactId>mule-http-connector</artifactId>
-			<!-- Identificador do artefato da dependência -->
 			<classifier>mule-plugin</classifier>
-			<!-- Classificador da dependência -->
 		</dependency>
 		<dependency>
 			<groupId>org.mule.connectors</groupId>
-			<!-- Identificador do grupo da dependência -->
 			<artifactId>mule-sockets-connector</artifactId>
-			<!-- Identificador do artefato da dependência -->
 			<classifier>mule-plugin</classifier>
-			<!-- Classificador da dependência -->
 		</dependency>
 		<dependency>
-			<groupId>e324e3b2-8af2-454c-884d-0af805811a27</groupId>
-			<!-- Identificador do grupo da dependência -->
-			<artifactId>poc-port-osf</artifactId>
-			<!-- Identificador do artefato da dependência -->
-			<classifier>oas</classifier>
-			<!-- Classificador da dependência -->
+			<groupId>f8f9abd2-10a0-400f-bb5b-60cbd5b8cb29</groupId>
+			<artifactId>areadenegocio-nomedaaplicacao-camadadeexposicao</artifactId>
+			<classifier>raml</classifier>
 			<type>zip</type>
-			<!-- Tipo da dependência -->
 		</dependency>
 		<dependency>
 			<groupId>org.mule.modules</groupId>
-			<!-- Identificador do grupo da dependência -->
 			<artifactId>mule-apikit-module</artifactId>
-			<!-- Identificador do artefato da dependência -->
 			<classifier>mule-plugin</classifier>
-			<!-- Classificador da dependência -->
-		</dependency>
-		<dependency>
-			<groupId>com.mulesoft.modules</groupId>
-			<artifactId>mule-secure-configuration-property-module</artifactId>
-			<classifier>mule-plugin</classifier>
-		</dependency>
-		<dependency>
-			<groupId>com.myorganization.myproject.globalconfigs</groupId>
-			<artifactId>areadenegocio-nomedaaplicacao-global-configs</artifactId>
-			<version>1.0.0</version>
-			<classifier>mule-domain</classifier>
-			<scope>provided</scope>
 		</dependency>
 	</dependencies>
 </project>

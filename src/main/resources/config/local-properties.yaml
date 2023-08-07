@@ -1,0 +1,22 @@
+api-main-listenner:
+  host: "localhost"
+  port: "8082"
+  protocol: "HTTPS"
+  paths:
+    base-path: "/"
+
+error-handler-global:
+  host: "localhost"
+  port: "8083"
+  protocol: "HTTP"
+  paths:
+    base-path: "/"
+    post-error-handler: "/error-handler"
+    
+# SSL/TLS Properties
+tls.keystore:
+  type: "PKCS12"
+  path: "certs/areanegocio-nomeapp-camada-dev.p12"
+  alias: "server"
+  password: "mule12345"
+  keyPassword: "mule12345"

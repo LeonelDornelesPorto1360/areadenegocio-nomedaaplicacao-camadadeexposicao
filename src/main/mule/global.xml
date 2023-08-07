@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule
+	xmlns:tls="http://www.mulesoft.org/schema/mule/tls"
+	xmlns:apikit="http://www.mulesoft.org/schema/mule/mule-apikit"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="
+http://www.mulesoft.org/schema/mule/mule-apikit http://www.mulesoft.org/schema/mule/mule-apikit/current/mule-apikit.xsd 
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/tls http://www.mulesoft.org/schema/mule/tls/current/mule-tls.xsd">
+
+
+
+
+	<http:listener-config
+		name="api-main-https-listener-config">
+		<http:listener-connection host="${api-main-listenner.host}"
+			port="${api-main-listenner.port}" tlsContext="api-main-tls-context" protocol="HTTPS"/>
+	</http:listener-config>
+
+
+
+
+
+	<apikit:config name="api-config"
+		api="resource::f8f9abd2-10a0-400f-bb5b-60cbd5b8cb29:areadenegocio-nomedaaplicacao-camadadeexposicao:1.0.0:raml:zip:api.raml"
+		outboundHeadersMapName="outboundHeaders"
+		httpStatusVarName="httpStatus" />
+	<configuration-properties doc:name="Configuration properties" doc:id="e1821dba-22ac-40a5-b2f4-621ca323af6f" file="config/properties.yaml" />
+	<configuration-properties doc:name="Configuration properties" doc:id="2152ed10-2a2e-4c52-866a-8d6ecbfb77a7" file="config/${env}-properties.yaml" />
+	<global-property doc:name="Global Property" doc:id="50ef4403-3cf4-4786-8f2f-c4be9d065398" name="env" value="local" />
+	<http:request-config name="HTTP_Request_Configuration_Error_Handler_Global" doc:name="HTTP Request configuration" doc:id="6b5c4b9f-e6ca-41a8-961c-cf452c4b723c" basePath="${error-handler-global.paths.base-path}" >
+		<http:request-connection protocol="${error-handler-global.protocol}" host="${error-handler-global.host}" port="${error-handler-global.port}" />
+	</http:request-config>
+	<tls:context name="api-main-tls-context" doc:name="TLS Context" doc:id="074a21a9-e635-4efd-b1d5-ad9213bce753" >
+		<tls:key-store type="pkcs12" path="${tls.keystore.path}" alias="${tls.keystore.alias}" keyPassword="${tls.keystore.password}" password="${tls.keystore.keyPassword}" />
+	</tls:context>
+
+
+
+
+
+
+
+</mule>

@@ -4,11 +4,23 @@
 	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
 http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
-	<flow name="get:\propostas\(numeroproposta)\origens\(origemproposta)" doc:id="996c3215-e711-4a64-8a23-55c00c6135cf" >
+	<sub-flow name="post:\customers" doc:id="b0c0f3ed-9aa3-46a1-8ce5-0c2a80ccdab0" >
+		<ee:transform doc:name="Transform Message">
+            <ee:message>
+                <ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+{
+  status: "Success",
+  response: "DLC56GJKH235bkTy"
+}]]></ee:set-payload>
+            </ee:message>
+        </ee:transform>
+	</sub-flow>
+	<sub-flow name="get:\customers\(customerId)" doc:id="1f606f37-18bb-4913-bed7-786db46d2c24" >
 		<ee:transform doc:name="Transform Message">
             <ee:variables>
-                <ee:set-variable variableName="numeroproposta">attributes.uriParams.'numeroproposta'</ee:set-variable>
-                <ee:set-variable variableName="origemproposta">attributes.uriParams.'origemproposta'</ee:set-variable>
+                <ee:set-variable variableName="customerId">attributes.uriParams.'customerId'</ee:set-variable>
             </ee:variables>
         </ee:transform>
 		<ee:transform doc:name="Transform Message">
@@ -16,64 +28,75 @@ http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/
                 <ee:set-payload><![CDATA[%dw 2.0
 output application/json
 ---
-[
-  {
-    convenio: "114",
-    dataProtocolo: "2023-05-23T00:00:00-03:00",
-    nomeSegurado: "BETINA E RENAN TELAS LTDA",
-    numeroOrigem: "20",
-    numeroProposta: "1111443",
-    produto: "Porto Frota",
-    qtdeDiasCia: "1",
-    status: "1",
-    susep: "S5005J"
-  }
-]]]></ee:set-payload>
+{
+  id: "0015f00000FbjJnAAJ",
+  partyRoleType: "Customer",
+  party: [
+    {
+      id: "43063099-5f8c-4390-8352-aeb7d9888763",
+      salutation: "Ms.",
+      personName: "Ernie Hilpert",
+      firstName: "Ernie",
+      lastName: "Hilpert",
+      birthDate: "1984-03-17",
+      partyType: "Individual",
+      contactPoints: [
+        {
+          contactPointType: [
+            "ContactPointAddress"
+          ],
+          id: "440f867d-f639-4447-99d2-44c172c94917",
+          activeFromDate: "2021-12-12",
+          addressLine1: "Heidenreich Summit",
+          cityName: "Kallietown",
+          postalCodeText: "43213",
+          stateProvinceName: "TX",
+          countryName: "USA",
+          geoLatitude: "84.711",
+          geoLongitude: "-26.1654",
+          geoAccuracy: 10
+        }, 
+        {
+          contactPointType: [
+            "ContactPointEmail"
+          ],
+          id: "9be2e69b-aa6e-4d8c-8fb3-04247292e394",
+          activeFromDate: "2021-12-12",
+          emailAddress: "Ernie.Hilpert@example.com"
+        }, 
+        {
+          contactPointType: [
+            "ContactPointPhone"
+          ],
+          id: "aace634a-f091-4523-989a-c9ed593ca1e9",
+          activeFromDate: "2021-12-12",
+          telephoneNumber: "830-728-9552"
+        }
+      ]
+    }
+  ],
+  externalIds: [
+    {
+      id: "a3736f1b-a2eb-4caa-9ad6-7fa49224efdc",
+      externalId: "00debbe4-6de9-4a17-a1da-2a109be4db52",
+      externalIdType: [
+        "MDM"
+      ],
+      statusLastChangedDate: "2021-12-12T19:24:20Z",
+      status: "VALID"
+    }
+  ],
+  auditInfo: {
+    createdDate: "2021-12-12T19:24:05Z",
+    createdBy: "Application Admin",
+    updatedDate: "2021-12-12T19:24:20Z",
+    updatedBy: "Application Admin",
+    isDeleted: false
+  },
+  customerNumber: "WLDECDG1",
+  customerStatus: "Active"
+}]]></ee:set-payload>
             </ee:message>
         </ee:transform>
-	</flow>
-	<flow name="get:\propostas\busca-por-periodo" doc:id="eab009ec-cde0-424f-8e95-ac366a98e54c" >
-		<ee:transform doc:name="Transform Message">
-            <ee:message>
-                <ee:set-payload><![CDATA[%dw 2.0
-output application/json
----
-[
-  {
-    convenio: "114",
-    dataProtocolo: "2023-05-23T00:00:00-03:00",
-    nomeSegurado: "BETINA E RENAN TELAS LTDA",
-    numeroOrigem: "20",
-    numeroProposta: "1111443",
-    produto: "Porto Frota",
-    qtdeDiasCia: "1",
-    status: "1",
-    susep: "S5005J"
-  }
-]]]></ee:set-payload>
-            </ee:message>
-        </ee:transform>
-	</flow>
-	<flow name="get:\propostas\busca-por-cliente" doc:id="2718ddeb-ae24-4cec-b83f-c30e28b9f620" >
-		<ee:transform doc:name="Transform Message">
-            <ee:message>
-                <ee:set-payload><![CDATA[%dw 2.0
-output application/json
----
-[
-  {
-    convenio: "114",
-    dataProtocolo: "2023-05-23T00:00:00-03:00",
-    nomeSegurado: "BETINA E RENAN TELAS LTDA",
-    numeroOrigem: "20",
-    numeroProposta: "1111443",
-    produto: "Porto Frota",
-    qtdeDiasCia: "1",
-    status: "1",
-    susep: "S5005J"
-  }
-]]]></ee:set-payload>
-            </ee:message>
-        </ee:transform>
-	</flow>
+	</sub-flow>
 </mule>
