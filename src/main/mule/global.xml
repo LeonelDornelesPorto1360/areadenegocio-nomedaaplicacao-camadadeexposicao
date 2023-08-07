@@ -17,7 +17,7 @@ http://www.mulesoft.org/schema/mule/tls http://www.mulesoft.org/schema/mule/tls/
 	<http:listener-config
 		name="api-main-https-listener-config">
 		<http:listener-connection host="${api-main-listenner.host}"
-			port="${api-main-listenner.port}" tlsContext="api-main-tls-context" protocol="HTTPS"/>
+			port="${api-main-listenner.port}"/>
 	</http:listener-config>
 
 
@@ -34,9 +34,6 @@ http://www.mulesoft.org/schema/mule/tls http://www.mulesoft.org/schema/mule/tls/
 	<http:request-config name="HTTP_Request_Configuration_Error_Handler_Global" doc:name="HTTP Request configuration" doc:id="6b5c4b9f-e6ca-41a8-961c-cf452c4b723c" basePath="${error-handler-global.paths.base-path}" >
 		<http:request-connection protocol="${error-handler-global.protocol}" host="${error-handler-global.host}" port="${error-handler-global.port}" />
 	</http:request-config>
-	<tls:context name="api-main-tls-context" doc:name="TLS Context" doc:id="074a21a9-e635-4efd-b1d5-ad9213bce753" >
-		<tls:key-store type="pkcs12" path="${tls.keystore.path}" alias="${tls.keystore.alias}" keyPassword="${tls.keystore.password}" password="${tls.keystore.keyPassword}" />
-	</tls:context>
 
 
 
