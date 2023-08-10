@@ -1,0 +1,14 @@
+api-main-listenner:
+  host: "0.0.0.0"
+  port: "8081"
+  protocol: "HTTP"
+  paths:
+    base-path: "/"
+
+error-handler-global:
+  host: "localhost"
+  port: "8083"
+  protocol: "HTTP"
+  paths:
+    base-path: "/"
+    post-error-handler: "/error-handler"

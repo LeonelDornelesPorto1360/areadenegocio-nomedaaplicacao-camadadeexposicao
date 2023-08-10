@@ -1,36 +1,27 @@
 ### DEPLOY MAVEN ###
 
-Organization name
-test123
-
-Organization domain
-test123-13
-
-Owner
-Leonel Porto
-
 Organization Id
-e324e3b2-8af2-454c-884d-0af805811a27
+f8f9abd2-10a0-400f-bb5b-60cbd5b8cb29
 
 Client Id
-1afbb75462b3401c990dbc7c84cdf3fc
+e094de0967ec44a294b8b018e2c2550b
 
 Client Secret
-8C86DA67880048dfA104627A31906654
+99dC2443c318473391B8E58F006e8BC0
 
 environment dev
 
 Client ID
-f14e562d14f94d58a20d2a2e1dadc4fd
+b4d18b5b07144fc9966c35cc4ceabe49
 
 Client Secret
-5Cd363E91a194D1E8D44c649e8075f3F
+B945e47213E44a38928d7148BC502021
 
 
 MyConnectedApp
 
-4b3586db49834affbcfeb200555558d4
-22D709b0fb5144499e38b07039dff669
+95c5341af04145238acab439781c0dc6
+Ae5e8722E6DD46a89576bd00D5aF4379
 
 
 Windows:
@@ -47,27 +38,4 @@ set client_secret=c95879bad8e04c2B8FB0d1448fb17C1d
 set ca_client_id=7ca315684a2d4bf1a702d52bed4719d3
 set ca_client_secret=F24661E29AE44F3991d48cf7eFF12F97
 
-mvn clean deploy -DmuleDeploy -DskipTests=true -Dmule.env=dev -Ddeployment.env=dev -Dap.client_id=f14e562d14f94d58a20d2a2e1dadc4fd -Dap.client_secret=5Cd363E91a194D1E8D44c649e8075f3F -Dencrypt.key=secure12345 -Dapi.layer=System -Dap.ca.client_id=4b3586db49834affbcfeb200555558d4 -Dap.ca.client_secret=22D709b0fb5144499e38b07039dff669 -DskipTests
-
-### GENERATE CERTIFICATE ###
-
-PROCEDURE
- 
-
-1. Create the Keystore certificate:
-     Keystore is a server-side asset that stores the private keys and the certificates with their public and private keys
- 
-keytool -v -genkeypair -keyalg RSA -dname "cn=MuleSoft, ou=MuleSoft, o=MuleSoft,L=San Francisco, st=CA, c=US" -ext SAN="DNS:localhost,IP:127.0.0.1" -validity 1825 -alias mykeyalias -keystore keystore.jks -keypass mule123 -storepass mule123
-
-or
-
-keytool -genkeypair -keystore check-in-papi-dev.p12 -storetype pkcs12 -storepass mule12345 -alias server -keyalg RSA -validity 365
-2. Export the Certificate to add it into Truststore:  
-    Export the certificate so that we can use it in the Truststore.
- 
-keytool -export -alias mykeyalias -file localhost.cer -keystore keystore.jks
- 
-3. Create a Trustore certificate:
-    Truststore is a client-side asset that serves as a repository of certificates (CA or simple) that the client should trust.
- 
-keytool -import -v -trustcacerts -alias mykeyalias -file localhost.cer -keystore truststore.jks
+mvn clean deploy -DmuleDeploy -DskipTests=true -Dmule.env=dev -Ddeployment.env=dev -Dap.client_id=b4d18b5b07144fc9966c35cc4ceabe49 -Dap.client_secret=B945e47213E44a38928d7148BC502021 -Dencrypt.key=secure12345 -Dapi.layer=System -Dap.ca.client_id=95c5341af04145238acab439781c0dc6 -Dap.ca.client_secret=Ae5e8722E6DD46a89576bd00D5aF4379 -DskipTests

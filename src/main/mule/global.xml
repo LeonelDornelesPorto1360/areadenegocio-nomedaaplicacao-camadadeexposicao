@@ -29,8 +29,8 @@ http://www.mulesoft.org/schema/mule/tls http://www.mulesoft.org/schema/mule/tls/
 		outboundHeadersMapName="outboundHeaders"
 		httpStatusVarName="httpStatus" />
 	<configuration-properties doc:name="Configuration properties" doc:id="e1821dba-22ac-40a5-b2f4-621ca323af6f" file="config/properties.yaml" />
-	<configuration-properties doc:name="Configuration properties" doc:id="2152ed10-2a2e-4c52-866a-8d6ecbfb77a7" file="config/${env}-properties.yaml" />
-	<global-property doc:name="Global Property" doc:id="50ef4403-3cf4-4786-8f2f-c4be9d065398" name="env" value="local" />
+	<configuration-properties doc:name="Configuration properties" doc:id="2152ed10-2a2e-4c52-866a-8d6ecbfb77a7" file="config/${mule.env}-properties.yaml" />
+	<global-property doc:name="Global Property" doc:id="50ef4403-3cf4-4786-8f2f-c4be9d065398" name="mule.env" value="local" />
 	<http:request-config name="HTTP_Request_Configuration_Error_Handler_Global" doc:name="HTTP Request configuration" doc:id="6b5c4b9f-e6ca-41a8-961c-cf452c4b723c" basePath="${error-handler-global.paths.base-path}" >
 		<http:request-connection protocol="${error-handler-global.protocol}" host="${error-handler-global.host}" port="${error-handler-global.port}" />
 	</http:request-config>
