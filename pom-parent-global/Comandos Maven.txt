@@ -1,0 +1,30 @@
+mvn clean deploy -DmuleDeploy -DskipTests=true -Dcloudhub.environment=dev -Dmule.environment=dev -Danypoint.platform.clientId=b4d18b5b07144fc9966c35cc4ceabe49 -Danypoint.platform.clientSecret=B945e47213E44a38928d7148BC502021 -Dmule.encryptionKey=mule12345 -Dapi.layer=System -Dap.ca.client_id=95c5341af04145238acab439781c0dc6 -Dap.ca.client_secret=Ae5e8722E6DD46a89576bd00D5aF4379 -DskipTests -Dcloudhub.mavenServerId=cloudhub -Dcloudhub.businessGroupId=f8f9abd2-10a0-400f-bb5b-60cbd5b8cb29 -Dcloudhub.region=us-east-2 -Dcloudhub.muleVersion=4.4.0 -Dcloudhub.applyLatestPatch=true -Dcloudhub.workerType=MICRO -Dcloudhub.workers=1 -Dcloudhub.objectStoreV2=true -Dcloudhub.persistentQueues=false -Dcloudhub.skipDeploymentVerification=false -Dcloudhub.deploymentTimeout=600000 -Danypoint.platform.enableMonitoring=true -Danypoint.platform.visualizerLayer=System -Danypoint.platform.apiManagerStatus=disabled
+
+
+set muleDeploy=true
+set skipTests=true
+set cloudhub.environment=dev
+set mule.environment=dev
+set anypoint.platform.clientId=b4d18b5b07144fc9966c35cc4ceabe49
+set anypoint.platform.clientSecret=B945e47213E44a38928d7148BC502021
+set mule.encryptionKey=mule12345
+set api.layer=System
+set ap.ca.client_id=95c5341af04145238acab439781c0dc6
+set ap.ca.client_secret=Ae5e8722E6DD46a89576bd00D5aF4379
+set cloudhub.mavenServerId=cloudhub
+set cloudhub.businessGroupId=f8f9abd2-10a0-400f-bb5b-60cbd5b8cb29
+set cloudhub.region=us-east-2
+set cloudhub.muleVersion=4.4.0
+set cloudhub.applyLatestPatch=true
+set cloudhub.workerType=MICRO
+set cloudhub.workers=1
+set cloudhub.objectStoreV2=true
+set cloudhub.persistentQueues=false
+set cloudhub.skipDeploymentVerification=false
+set cloudhub.deploymentTimeout=600000
+set anypoint.platform.enableMonitoring=true
+set anypoint.platform.visualizerLayer=System
+set anypoint.platform.apiManagerStatus=disabled
+
+
+mvn clean deploy -DmuleDeploy=%muleDeploy% -DskipTests=%skipTests% -Dcloudhub.environment=%cloudhub.environment% -Dmule.environment=%mule.environment% -Danypoint.platform.clientId=%anypoint.platform.clientId% -Danypoint.platform.clientSecret=%anypoint.platform.clientSecret% -Dmule.encryptionKey=%mule.encryptionKey% -Dapi.layer=%api.layer% -Dap.ca.client_id=%ap.ca.client_id% -Dap.ca.client_secret=%ap.ca.client_secret% -Dcloudhub.mavenServerId=%cloudhub.mavenServerId% -Dcloudhub.businessGroupId=%cloudhub.businessGroupId% -Dcloudhub.region=%cloudhub.region% -Dcloudhub.muleVersion=%cloudhub.muleVersion% -Dcloudhub.applyLatestPatch=%cloudhub.applyLatestPatch% -Dcloudhub.workerType=%cloudhub.workerType% -Dcloudhub.workers=%cloudhub.workers% -Dcloudhub.objectStoreV2=%cloudhub.objectStoreV2% -Dcloudhub.persistentQueues=%cloudhub.persistentQueues% -Dcloudhub.skipDeploymentVerification=%cloudhub.skipDeploymentVerification% -Dcloudhub.deploymentTimeout=%cloudhub.deploymentTimeout% -Danypoint.platform.enableMonitoring=%anypoint.platform.enableMonitoring% -Danypoint.platform.visualizerLayer=%anypoint.platform.visualizerLayer% -Danypoint.platform.apiManagerStatus=%anypoint.platform.apiManagerStatus%

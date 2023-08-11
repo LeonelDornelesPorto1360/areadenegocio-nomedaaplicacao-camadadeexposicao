@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<!-- Define a versão do modelo do POM -->
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>${ORG_ID}</groupId>
+	<artifactId>pom-parent</artifactId>
+	<version>1.0.0</version>
+	<packaging>pom</packaging>
+	
+	<name>pom-parent</name>
+	<description>Parent Maven build for MuleSoft Accelerators projects</description>
+
+	<!-- Define propriedades personalizadas -->
+	<properties>
+		<!-- A propriedade deployment.env será definida a partir da linha de comando 
+			com a opção -Ddeployment.env=... -->
+		<deployment.env>will be set from command-line with
+			-Ddeployment.env=...</deployment.env>
+
+		<!-- Define um prefixo para o nome de implantação -->
+		<deployment.prefix>org-</deployment.prefix>
+
+		<!-- Define um sufixo para o nome de implantação, usando o valor da propriedade 
+			deployment.env -->
+		<deployment.suffix>-${cloudhub.environment}</deployment.suffix>
+
+		<!-- Combina o identificador do artefato, o prefixo e o sufixo para formar 
+			o nome de implantação -->
+		<deployment.name>${deployment.prefix}${project.artifactId}${deployment.suffix}</deployment.name>
+		<mule.app.classifier>mule-application</mule.app.classifier>
+	</properties>
+
+	<build>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
+		<testResources>
+			<testResource>
+				<directory>src/test/resources</directory>
+				<filtering>true</filtering>
+			</testResource>
+		</testResources>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-resources-plugin</artifactId>
+					<configuration>
+						<nonFilteredFileExtensions>
+							<nonFilteredFileExtension>cer</nonFilteredFileExtension>
+							<nonFilteredFileExtension>crt</nonFilteredFileExtension>
+							<nonFilteredFileExtension>jks</nonFilteredFileExtension>
+							<nonFilteredFileExtension>p12</nonFilteredFileExtension>
+							<nonFilteredFileExtension>pem</nonFilteredFileExtension>
+							<nonFilteredFileExtension>pfx</nonFilteredFileExtension>
+						</nonFilteredFileExtensions>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-clean-plugin</artifactId>
+				</plugin>
+				<plugin>
+					<groupId>org.mule.tools.maven</groupId>
+					<artifactId>mule-maven-plugin</artifactId>
+					<extensions>true</extensions>
+				</plugin>
+				<plugin>
+					<groupId>com.mulesoft.munit.tools</groupId>
+					<artifactId>munit-maven-plugin</artifactId>
+					<executions>
+						<execution>
+							<id>test</id>
+							<phase>test</phase>
+							<goals>
+								<goal>test</goal>
+								<goal>coverage-report</goal>
+							</goals>
+						</execution>
+					</executions>
+					<configuration>
+						<coverage>
+							<runCoverage>true</runCoverage>
+							<formats>
+								<format>html</format>
+							</formats>
+						</coverage>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.mule.tools.maven</groupId>
+					<artifactId>mule-maven-plugin</artifactId>
+					<version>${mule.maven.plugin.version}</version>
+					<extensions>true</extensions>
+					<configuration>
+						<classifier>${mule.app.classifier}</classifier>
+						<cloudHubDeployment>
+							<artifact>target/${project.artifactId}-${project.version}-${mule.app.classifier}.jar</artifact>
+							<uri>https://anypoint.mulesoft.com</uri>
+							<server>${cloudhub.mavenServerId}</server>
+							<businessGroupId>${cloudhub.businessGroupId}</businessGroupId>
+							<environment>${cloudhub.environment}</environment>
+							<region>${cloudhub.region}</region>
+							<muleVersion>${cloudhub.muleVersion}</muleVersion>
+							<applyLatestRuntimePatch>${cloudhub.applyLatestPatch}</applyLatestRuntimePatch>
+							<workers>${cloudhub.workers}</workers>
+							<workerType>${cloudhub.workerType}</workerType>
+							<objectStoreV2>${cloudhub.objectStoreV2}</objectStoreV2>
+							<persistentQueues>${cloudhub.persistentQueues}</persistentQueues>
+							<skipDeploymentVerification>${cloudhub.skipDeploymentVerification}</skipDeploymentVerification>
+							<applicationName>${deployment.name}</applicationName>
+							<deploymentTimeout>${cloudhub.deploymentTimeout}</deploymentTimeout>
+							<connectedAppGrantType>client_credentials</connectedAppGrantType>
+							<connectedAppClientId>${ap.ca.client_id}</connectedAppClientId>
+							<connectedAppClientSecret>${ap.ca.client_secret}</connectedAppClientSecret>
+							<properties>
+								<anypoint.platform.client_id>${anypoint.platform.clientId}</anypoint.platform.client_id>
+								<anypoint.platform.client_secret>${anypoint.platform.clientSecret}</anypoint.platform.client_secret>
+								<mule.env>${mule.environment}</mule.env>
+								<encrypt.key>${mule.encryptionKey}</encrypt.key>
+								<anypoint.platform.config.analytics.agent.enabled>${anypoint.platform.enableMonitoring}</anypoint.platform.config.analytics.agent.enabled>
+								<anypoint.platform.visualizer.layer>${anypoint.platform.visualizerLayer}</anypoint.platform.visualizer.layer>
+								<anypoint.platform.gatekeeper>${anypoint.platform.apiManagerStatus}</anypoint.platform.gatekeeper>
+								<anypoint.platform.visualizer.displayName>${project.artifactId}</anypoint.platform.visualizer.displayName>
+							</properties>
+						</cloudHubDeployment>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+	<distributionManagement>
+		<repository>
+			<id>Exchange2</id>
+			<name>Exchange Leonel</name>
+			<url>https://maven.anypoint.mulesoft.com/api/v1/organizations/${project.groupId}/maven</url>
+			<layout>default</layout>
+		</repository>
+	</distributionManagement>
+</project>
